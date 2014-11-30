@@ -1,0 +1,26 @@
+<!-->********************************************************************
+# Virtual Whiteboard System Based on Image Processing
+# Setup
+#
+# Author: Alankar Kotwal <alankarkotwal13@gmail.com>
+#********************************************************************<-->
+
+<whiteboard>
+	<capture>
+		<captureNo>1</captureNo>
+		<distance>1</distance>
+	</capture>
+	
+	<imgproc>
+		<threshold>250</threshold>
+		<minPixelNo>10</minPixelNo>
+		<maxVal>1</maxVal>
+	</imgproc>
+	
+	<rendering>
+		<lineWidth>8</lineWidth>
+		<r>255</r>
+		<g>255</g>
+		<b>0</b>
+	</rendering>
+</whiteboard>
