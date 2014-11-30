@@ -1,26 +1,28 @@
 <!-->********************************************************************
 # Virtual Whiteboard System Based on Image Processing
-# Setup
+# Config File
 #
 # Author: Alankar Kotwal <alankarkotwal13@gmail.com>
 #********************************************************************<-->
 
 <whiteboard>
+	<!-- Capture device specifications. -->
 	<capture>
-		<captureNo>1</captureNo>
-		<distance>1</distance>
+		<captureNo>1</captureNo>	<!-- Capture device number. Usually 1 if you're using an external webcam -->
+		<distance>1</distance>		<!-- Distance from camera to projection surface. Unused -->
 	</capture>
 	
 	<imgproc>
-		<threshold>250</threshold>
-		<minPixelNo>10</minPixelNo>
-		<maxVal>1</maxVal>
+		<threshold>235</threshold>	<!-- Threshold value for laser detection -->
+		<minPixelNo>10</minPixelNo>	<!-- Minimum number of pixels that need to be detected above threshold -->
+		<maxVal>1</maxVal>		<!-- Maximum value assigned after threshold. Do not change. -->
 	</imgproc>
 	
 	<rendering>
-		<lineWidth>8</lineWidth>
-		<r>255</r>
-		<g>255</g>
-		<b>0</b>
+		<lineWidth>8</lineWidth>	<!-- Thickness of the line drawn in pixels -->
+		<r>255</r>			<!-- R component of the line color -->
+		<g>255</g>			<!-- G component of the line color -->
+		<b>0</b>			<!-- B component of the line color -->
+		<mode>lines</mode>		<!-- Mode. Among 'lines' and 'circles' -->
 	</rendering>
 </whiteboard>

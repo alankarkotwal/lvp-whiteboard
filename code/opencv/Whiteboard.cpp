@@ -12,14 +12,14 @@
 #include <boost/property_tree/xml_parser.hpp>
 #include <sstream>
 #include <string>
-#include "path.hpp"
+//#include "path.hpp"
 
 using namespace cv;
 
 int main() {
 
 	std::stringstream configPath;
-	configPath<<REPO_ROOT<<"/config/config.xml";
+	configPath<<"../../../config/config.xml";
 
 	boost::property_tree::ptree config;
 	boost::property_tree::read_xml(configPath.str(), config);
@@ -33,7 +33,10 @@ int main() {
 	namedWindow("Drawing", WINDOW_AUTOSIZE);
 	
 	Moments mom;
+	Point cen, oldCen;
 	int xC, yC;
+	
+	bool first=1;
 	
 	while(1) {
 	
@@ -51,11 +54,20 @@ int main() {
 		xC = mom.m10 / mom.m00;
 		yC = mom.m01 / mom.m00;
 		
-		Point cen(xC, yC);
+		oldCen.x = cen.x;
+		oldCen.y = cen.y;
+		cen.x = xC;
+		cen.y = yC;
 		Scalar color(config.get<int>("whiteboard.rendering.b"), config.get<int>("whiteboard.rendering.g"), config.get<int>("whiteboard.rendering.r"));
 		
 		if(mom.m00 > config.get<int>("whiteboard.imgproc.minPixelNo")) {
-			circle(draw, cen, config.get<int>("whiteboard.rendering.lineWidth"), color, 0, 8, 0);
+			if(config.get<string>("whiteboard.rendering.mode") == "circles") {
+				circle(draw, cen, config.get<int>("whiteboard.rendering.lineWidth"), color, 0, 8, 0);
+			}
+			else if(config.get<string>("whiteboard.rendering.mode") == "lines" && first == 0) {
+				line(draw, oldCen, cen, color, config.get<int>("whiteboard.rendering.lineWidth"), 8, 0);
+			}
+			first = 0;
 		}
 		
 		imshow("Drawing", draw);
